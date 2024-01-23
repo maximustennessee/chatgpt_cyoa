@@ -1,6 +1,16 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 
+###############################################################
+# TO DO
+# 1) Add chat history memory buffer
+# 2) Add support for multiple llm clients
+# 3) Add dynamic authentication
+# 4) Add a sleek front end client for choices and responses
+# 5) Add support for DALL-E or other image responses
+#############################################################
+
+
 load_dotenv()
 
 client = OpenAI()
@@ -45,6 +55,3 @@ while True:
     choice = input("Your answer:")
 
     chat_history += "AI: " + completion.choices[0].message.content + " Human: " + choice
-
-
-
