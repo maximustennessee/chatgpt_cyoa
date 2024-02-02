@@ -1,7 +1,8 @@
 # chatgpt_cyoa
 
 Welcome to LLM Choose Your Own Adventure, a dynamic chat driven game that tosses our hero Grogu headfirst into
-a fantastical realm where the only limit is your imagination and every choice could mean life or death.
+a fantastical realm where the only limit is your imagination and every choice could mean life or death. This
+chatbot implements Retrieval Augmented Generation to maintain the storyline context.
 
 In order to run this app <br/>
     1) run `pip3 install requirements.txt`<br/>
