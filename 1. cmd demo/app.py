@@ -20,7 +20,7 @@ while True:
 
     # define our interface for chatting with OpenAI
     completion = client.chat.completions.create(
-    model="gpt-4",
+    model="gpt-3.5",
     messages=[
         {"role": "system", "content": chat_messages.system_message.format(chat_history = chat_history)},
         {"role": "user", "content": choice}
