@@ -23,7 +23,6 @@ load_dotenv()
 class Agent():
 
     def __init__(self, url):
-
         loader = WebBaseLoader(url)
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter()
@@ -42,8 +41,3 @@ class Agent():
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
         agent = create_openai_functions_agent(llm, tools, prompt)
         self.executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
-
-# agent = Agent("https://www.dndbeyond.com/equipment")
-
-# response = agent.executor({"input":"hi, what's in my inventory?"})
-# print(response)
