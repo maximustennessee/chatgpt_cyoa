@@ -9,7 +9,6 @@ a new path, ultimately determining the Traveler's fate.
 2) Have some paths that lead to the end of the story, where the traveler is successful. If the story ends in success generate a response that ends in "Congratulations, traveler" and ends the story.
 3) Have some paths that lead to the end of the story, in which the traveler dies. If the traveler dies generate a response that ends in "Goodbye, traveler" and ends the story.
 
-Here is the chat history to understand what to say next: {chat_history}
 """
 
 response_message = """

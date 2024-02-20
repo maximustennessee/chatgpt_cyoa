@@ -5,4 +5,5 @@ Inventory = https://www.dndbeyond.com/equipment
 
 To run:
 
+python3 -m http.server
 streamlit run app.py debug==True

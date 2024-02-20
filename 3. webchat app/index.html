@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traveller's Index of Unusual Items with Paging</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .item { margin-bottom: 20px; }
+        .title { font-weight: bold; }
+        .description { margin-top: 5px; }
+        .page { cursor: pointer; color: blue; text-decoration: underline; }
+        .page-content { display: none; } /* Hide all pages initially */
+    </style>
+</head>
+<body>
+    <h1>Traveller's Inventory of Unusual Items</h1>
+
+    <!-- Page 1 Items -->
+    <div class="page-content" id="page-1">
+        <div class="item">
+            <div class="title">Antimatter Amplifier</div>
+            <div class="description">Turns your silence into the loudest statement. Warning: May cause unexpected universe resets.</div>
+        </div>
+        <!-- More items for Page 1 -->
+        <div class="item">
+            <div class="title">Blight Booster</div>
+            <div class="description">Gives your entire general vicinity the "zombie chic" look. Perfect for Halloween.</div>
+        </div>
+
+        <div class="item">
+            <div class="title">Crystal Crossbow</div>
+            <div class="description">For when you need to make a sparkling impression. Warning: Rainbows may occur upon firing.</div>
+        </div>
+
+        <div class="item">
+            <div class="title">Dilithium Dentures</div>
+            <div class="description">Bite through the toughest steak at warp speed. Disclaimer: We're not responsible for accidental space-time continuum breaches.</div>
+        </div>
+
+        <div class="item">
+            <div class="title">Enraged Earrings</div>
+            <div class="description">They hex committers of fashion faux pas. Great for social events you never wanted to attend.</div>
+        </div>
+    </div>  
+
+    <!-- Page 2 Items -->
+    <div class="page-content" id="page-2">
+        <div class="item">
+            <div class="title">Formidable Femur</div>
+            <div class="description">A leg up in any fight. This bone means business.</div>
+        </div>
+        <div class="item">
+            <div class="title">Gargantuan Golf Club</div>
+            <div class="description">For those who believe golf should be a full-contact sport. Warning: May not be allowed on all courses.</div>
+        </div>
+    
+        <div class="item">
+            <div class="title">Horrific Hamster</div>
+            <div class="description">It's cute, cuddly, and possibly carnivorous. Sleep with one eye open.</div>
+        </div>
+    
+        <div class="item">
+            <div class="title">Improvised ICBM</div>
+            <div class="description">Made from household items. For when you absolutely, positively need to deliver a message next door (or to another continent).</div>
+        </div>
+    
+        <div class="item">
+            <div class="title">Jolly Javelin</div>
+            <div class="description">Guaranteed to bring a smile to your face, right before impact.</div>
+        </div>
+    </div>
+
+    <!-- Paging Navigation -->
+    <div>
+        <span class="page" onclick="showPage(1)">Page 1</span> | 
+        <span class="page" onclick="showPage(2)">Page 2</span>
+    </div>
+
+    <script>
+        function showPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+
+            // Show the selected page
+            const selectedPage = document.getElementById(`page-${pageNumber}`);
+            selectedPage.style.display = 'block';
+
+            // Ensure items on the selected page are visible
+            selectedPage.querySelectorAll('.item').forEach(item => {
+                item.style.display = 'block';
+            });
+        }
+
+        // Initially show the first page
+        showPage(1);
+    </script>
+</body>
+</html>

@@ -38,6 +38,10 @@ class Agent():
         search = TavilySearchResults()
         tools = [search, retriever_tool]
         prompt = hub.pull("hwchase17/openai-functions-agent")
-        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=2)
         agent = create_openai_functions_agent(llm, tools, prompt)
         self.executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+        print("FAISS FAISS")
+        docs = vector.similarity_search("*")
+        for d in docs:
+            print(d)

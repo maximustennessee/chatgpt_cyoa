@@ -5,17 +5,27 @@ import chat_messages
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 
 def get_response(user_query):
-    return "AMAZING RESPONSE"
+    response = st.session_state.agent.executor(
+        {"system": chat_messages.system_message,
+         "chat_history": st.session_state.chat_history,
+         "input": user_query
+         })
+    
+    return response.get("output")
 
-legendary_weapons = "https://www.dndbeyond.com/magic-items?filter-type=0&filter-type=9&filter-search=&filter-rarity=5&filter-requires-attunement=&filter-effect-type=&filter-effect-subtype=&filter-has-charges=&filter-partnered-content=f"
+legendary_weapons = "http://localhost:8000/"
 
 if "chat_history" not in st.session_state:
-    agent = tools.Agent(legendary_weapons)  
+    agent = tools.Agent(legendary_weapons) 
+    print("HELLLOOOOO") 
     st.session_state.chat_history = []
-    init_message = "Welcome traveler, I am Xam the dungeon master. In order to start your noble quest, choose from the available inventory:"
-    response = agent.executor({"input": "What the first 10 items are in my inventory? respond with just names of weapons in a comma separated list with no other text"})
+    init_message = "Welcome traveler, I am Xam the dungeon master. In order to start your noble quest, choose from the available inventory: "
+    response = agent.executor({"input": "Pick a random assortment of legendary weapons from the inventory. Respond with the full of weapons in a comma separated list with no other text"})
+    print("IM WAITINGGGGGG")
     init_message = init_message + response.get("output")
     st.session_state.chat_history.append(AIMessage(content=init_message))
+    st.session_state.agent = agent
+    print("WHATS HAPPENING")
 
 #sidebar
 with st.sidebar:
