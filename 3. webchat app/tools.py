@@ -28,20 +28,17 @@ class Agent():
         text_splitter = RecursiveCharacterTextSplitter()
         documents = text_splitter.split_documents(docs)
         embeddings = OpenAIEmbeddings()
-        vector = FAISS.from_documents(documents, embeddings)
-        retriever = vector.as_retriever()
-        retriever_tool = create_retriever_tool(
-            retriever,
+        self.vector = FAISS.from_documents(documents, embeddings)
+        self.retriever = self.vector.as_retriever()
+        self.retriever_tool = create_retriever_tool(
+            self.retriever,
             "inventory_search",
-            "Search for information about inventory. For any questions about inventory you must use this tool!",
+            "For any questions about inventory you must use this tool.",
         )
-        search = TavilySearchResults()
-        tools = [search, retriever_tool]
-        prompt = hub.pull("hwchase17/openai-functions-agent")
-        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=2)
-        agent = create_openai_functions_agent(llm, tools, prompt)
-        self.executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
-        print("FAISS FAISS")
-        docs = vector.similarity_search("*")
-        for d in docs:
-            print(d)
+        self.search = TavilySearchResults()
+        self.tools = [self.retriever_tool, self.search]
+        self.prompt = hub.pull("hwchase17/openai-functions-agent")
+        # Keep temperature at 0 or risk insanity
+        self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+        self.agent = create_openai_functions_agent(self.llm, self.tools, self.prompt)
+        self.executor = AgentExecutor(agent=self.agent, tools=self.tools, verbose=True)

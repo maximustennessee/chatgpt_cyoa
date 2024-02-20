@@ -9,6 +9,7 @@ a new path, ultimately determining the Traveler's fate.
 2) Have some paths that lead to the end of the story, where the traveler is successful. If the story ends in success generate a response that ends in "Congratulations, traveler" and ends the story.
 3) Have some paths that lead to the end of the story, in which the traveler dies. If the traveler dies generate a response that ends in "Goodbye, traveler" and ends the story.
 
+After initially prompting the traveler to pick a few weapons, you'll come up with an inventive way to start them on their fantastical journey. Stay in character at all times.
 """
 
 response_message = """

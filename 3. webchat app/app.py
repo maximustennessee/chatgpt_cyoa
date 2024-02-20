@@ -17,15 +17,16 @@ legendary_weapons = "http://localhost:8000/"
 
 if "chat_history" not in st.session_state:
     agent = tools.Agent(legendary_weapons) 
-    print("HELLLOOOOO") 
     st.session_state.chat_history = []
-    init_message = "Welcome traveler, I am Xam the dungeon master. In order to start your noble quest, choose from the available inventory: "
-    response = agent.executor({"input": "Pick a random assortment of legendary weapons from the inventory. Respond with the full of weapons in a comma separated list with no other text"})
-    print("IM WAITINGGGGGG")
+    init_message = "Welcome traveler, I am Xam the dungeon master. In order to start your noble quest, choose from the available inventory. "
+    response = agent.executor(
+        {"input": "List the just the weapons and descriptions found in the inventory.",
+         "system": chat_messages.system_message
+         })
     init_message = init_message + response.get("output")
+    st.session_state.chat_history.append(SystemMessage(content=chat_messages.system_message))
     st.session_state.chat_history.append(AIMessage(content=init_message))
     st.session_state.agent = agent
-    print("WHATS HAPPENING")
 
 #sidebar
 with st.sidebar:
@@ -42,9 +43,17 @@ for m in st.session_state.chat_history:
     if isinstance(m, AIMessage):
         with st.chat_message("AI"):
             st.write(m.content)
-    else:
+    if isinstance(m, HumanMessage):
         with st.chat_message("Human"):
             st.write(m.content)
 
 with st.sidebar:
     st.write(st.session_state.chat_history)
+
+print('lower')
+print(type(st.session_state.chat_history[-1].content.lower()))
+
+for e in ["congratulations", "goodbye"]:
+    if e in st.session_state.chat_history[-1].content.lower():
+        # this should restart the game
+        pass
